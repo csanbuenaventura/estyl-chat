@@ -38,7 +38,7 @@ const defaultQuickReplies: QuickReplyItemProps[] = [
     isHighlight: true,
   },
   {
-    name: "How to create content?",
+    name: "What to wear?",
     isHighlight: true,
   },
 ];
