@@ -1,0 +1,206 @@
+.ChatApp {
+  background-color: #ffffff;
+
+  .Navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px !important;
+
+    .Navbar__left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .Navbar__image {
+        border-radius: 50%;
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+
+        }
+      }
+
+      .Navbar__title {
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+
+    background-color: #4020cb;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
+
+    padding: 5px 15px;
+
+    * {
+      color: #ffffff;
+    }
+  }
+
+  .Notice {
+    background-color: #ffffff;
+  }
+
+  .MessageList {
+    padding: 24px 24px;
+  }
+
+  .Bubble {
+    font-size: 14px;
+    padding-inline: 15px;
+    padding-block: 12px;
+    border-radius: 8px;
+  }
+
+  .Message.left .Bubble {
+    background: linear-gradient(339.94deg,
+        rgb(244, 251, 255) 55.36%,
+        rgba(244, 251, 255, 0) 98.66%);
+    color: #000000;
+    border: 1px solid rgb(229, 238, 243);
+  }
+
+  .Message.right .Bubble {
+    background-color: rgb(72, 63, 236);;
+    color: #ffffff;
+  }
+
+  .MessageContainer {
+    background-color: #ffffff !important;
+  }
+
+  .MessageContainer:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 64px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    /* background-image: url(https://crowy.vercel.app/static/media/mLogo.4292177f211cf25db80a.png); */
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.1;
+  }
+
+  .Avatar img {
+    height: unset;
+  }
+
+  .ChatFooter {
+    background-color: #ffffff;
+
+
+    .ScrollView {
+      &-control {}
+
+      &-scroller {}
+    }
+
+
+
+    .Composer {
+      padding: 0;
+      position: relative;
+      border: 1px solid #eaeaea;
+
+      &-inputWrap {
+
+        .Input {
+          border-radius: 20px;
+          padding: 20px 40px 20px 20px !important;
+          height: 60px;
+          overflow: auto;
+          font-size: 16px;
+          line-height: 1.5;
+
+        }
+      }
+
+      &-actions {
+        display: none;
+        height: 4.5rem;
+
+        .Composer-sendBtn {
+          all: unset;
+        }
+      }
+
+
+
+      .chatui-send-btn {
+        color: #888888;
+        cursor: pointer;
+        user-select: none;
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+
+        svg {
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            color: #FFB300;
+          }
+        }
+      }
+
+    }
+
+
+    .QuickReplies {
+      border-top: 1px solid #eaeaea;
+      background-color: #ffffff;
+    }
+
+    .QuickReply {
+      padding: 10px;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+
+    .QuickReply.highlight {
+      border-color: rgba(40, 0, 135, 0.5);
+    } 
+
+
+  }
+
+}
+
+.orbina-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap: 4px;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+
+    img {
+      width: 24px;
+    }
+  }
+}
