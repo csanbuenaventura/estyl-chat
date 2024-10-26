@@ -36,7 +36,7 @@ os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
 os.environ['LANGCHAIN_API_KEY'] = "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"
 os.environ["LANGCHAIN_PROJECT"] = "estyl"
 os.environ['TAVILY_API_KEY'] = "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"
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "sk-svcacct-vZG2VCHIjZUn7fl3EmK51F77F3aPcLnrVf7Bd0-Z0DUzt9Zv9mfomR09b_7gvT3BlbkFJPnOvUAPfOk75znoM8NPQDGS8KAEhSuj82s5I5jmjpvLo7-13URd9cnDBHk_wgA"
 
 import sys
 from pathlib import Path
