@@ -15,6 +15,7 @@ class GraphState(TypedDict):
     answers : int # Number of answers generated
     documents : List[str] # List of retrieved documents
     loop_step: Annotated[int, operator.add] # loop step
+    generate_outfit: str # do i generate an outfit
     # conversation_history: List[Dict[str, Any]]
     # generate_outfit : bool 
     # generated_outfit : dict

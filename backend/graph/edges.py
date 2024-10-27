@@ -98,7 +98,7 @@ def grade_generation_v_documents_and_question(state):
     max_retries = state.get("max_retries", 3) # Default to 3 if not provided
 
     score = shared_resources_list["hallucination_grader_chain"].invoke({"documents": documents, "generation": generation})
-    grade = score.binary_score
+    grade = score.binary_score.lower()
 
     # Check hallucination
     if grade == "yes":
@@ -124,26 +124,26 @@ def grade_generation_v_documents_and_question(state):
         print("---DECISION: MAX RETRIES REACHED---")
         return "max retries"  
     
-def decide_to_generate_outfits(state):
-    """
-    Determines whether to generate an outfit
+# def decide_to_generate_outfit(state):
+#     """
+#     Determines whether to generate an outfit
 
-    Args:
-        state (dict): The current graph state
+#     Args:
+#         state (dict): The current graph state
 
-    Returns:
-        str: Binary decision for next node to call
-    """
+#     Returns:
+#         str: Binary decision for next node to call
+#     """
 
-    print("---ASSESS GRADED DOCUMENTS---")
-    generate_outfit = state["generate_outfit"]
+#     print("---ASSESS GRADED DOCUMENTS---")
+#     generate_outfit = state["generate_outfit"].lower()
 
-    if web_search == "Yes":
-        # All documents have been filtered check_relevance
-        # We will re-generate a new query
-        print("---DECISION: NOT ALL DOCUMENTS ARE RELEVANT TO QUESTION, INCLUDE WEB SEARCH---")
-        return "websearch"
-    else:
-        # We have relevant documents, so generate answer
-        print("---DECISION: GENERATE---")
-        return "generate"
+#     if generate_outfit == "yes":
+#         # All documents have been filtered check_relevance
+#         # We will re-generate a new query
+#         print("---DECISION: NOT ALL DOCUMENTS ARE RELEVANT TO QUESTION, INCLUDE WEB SEARCH---")
+#         return "generate outfit"
+#     else:
+#         # We have relevant documents, so generate answer
+#         print("---DECISION: GENERATE---")
+#         return "continue conversation"

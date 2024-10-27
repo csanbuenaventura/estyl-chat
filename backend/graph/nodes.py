@@ -77,14 +77,9 @@ def generate(state):
     messages = state["messages"]
     
     # RAG generation
-    generation = shared_resources_list["rag_chain"].invoke({"context": documents, "question": question, "messages": messages})
-    # Create a conversation entry
-    # entry = {
-    #     "human": question,
-    #     "ai": generation
-    # }
-    # Append the entry to the conversation history
-    # conversation_history.append(entry)
+    answer = shared_resources_list["rag_chain"].invoke({"context": documents, "question": question, "messages": messages})
+    generation = answer.generation
+    print("generation: ", generation, "complete: ", answer.binary_score)
     messages = [
         HumanMessage(content=question),
         SystemMessage(content=generation),
@@ -93,6 +88,7 @@ def generate(state):
         "generation": generation, 
         "loop_step": loop_step+1,
         "messages": messages,
+        "generate_outfit": answer.binary_score
     }
 
 def grade_documents(state):
@@ -162,21 +158,22 @@ def web_search(state):
         documents = [web_results]
     return {"documents": documents}
 
-# def generate_outfits(state):
-#     """
-#     Generate answer using RAG on retrieved documents
+def generate_outfit(state):
+    """
+    Generate answer using RAG on retrieved documents
 
-#     Args:
-#         state (dict): The current graph state
+    Args:
+        state (dict): The current graph state
 
-#     Returns:
-#         state (dict): New key added to state, generation, that contains LLM generation
-#     """
-#     print("---GENERATE---")
-#     question = state["question"]
-#     documents = state["documents"]
-#     loop_step = state.get("loop_step", 0)
+    Returns:
+        state (dict): New key added to state, generation, that contains LLM generation
+    """
+    print("---GENERATE---")
+    question = state["question"]
+    documents = state["documents"]
+    loop_step = state.get("loop_step", 0)
+    generate_outfit = state["generate_outfit"]
     
-#     # RAG generation
-#     generation = rag_chain.invoke({"context": documents, "question": question})
-#     return {"generation": generation, "loop_step": loop_step+1}
+    # RAG generation
+    generation = rag_chain.invoke({"context": documents, "question": question})
+    return {"generation": generation, "loop_step": loop_step+1}
