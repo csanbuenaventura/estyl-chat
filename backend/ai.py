@@ -27,14 +27,14 @@ def _set_env(var: str):
     if not os.environ.get(var):
         os.environ[var] = getpass.getpass(f"{var}: ")
 
-# # _set_env("TAVILY_API_KEY")
-# os.environ['TOKENIZERS_PARALLELISM'] = 'true'
+# _set_env("TAVILY_API_KEY")
+os.environ['TOKENIZERS_PARALLELISM'] = 'true'
 
-# # _set_env("LANGCHAIN_API_KEY")
-# os.environ['LANGCHAIN_TRACING_V2'] = 'true'
-# os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
-# os.environ['LANGCHAIN_API_KEY'] = "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"
-# os.environ["LANGCHAIN_PROJECT"] = "estyl"
+# _set_env("LANGCHAIN_API_KEY")
+os.environ['LANGCHAIN_TRACING_V2'] = 'true'
+os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
+os.environ['LANGCHAIN_API_KEY'] = "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"
+os.environ["LANGCHAIN_PROJECT"] = "estyl"
 os.environ['TAVILY_API_KEY'] = "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"
 os.environ["OPENAI_API_KEY"] = "sk-svcacct-vZG2VCHIjZUn7fl3EmK51F77F3aPcLnrVf7Bd0-Z0DUzt9Zv9mfomR09b_7gvT3BlbkFJPnOvUAPfOk75znoM8NPQDGS8KAEhSuj82s5I5jmjpvLo7-13URd9cnDBHk_wgA"
 
@@ -46,45 +46,6 @@ from chains import *
 from tools import *
 from graph import *
 from graph.shared_resources import shared_resources_list
-
-# data = {}
-
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     # Init
-#     print("Startup")
-#     # Initialize the resources once
-#     llm = ChatOpenAI()
-#     loader = PyPDFLoader('pdfs/ESTYL _ STYLE GUIDE (pdf).pdf')
-#     docs = loader.load()
-
-#     print("shared :", shared_resources_list)
-
-#     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-#     splits = text_splitter.split_documents(docs)
-#     vectorstore = InMemoryVectorStore.from_documents(documents=splits, embedding=OpenAIEmbeddings())
-#     retriever = vectorstore.as_retriever()
-
-#     web_search_tool = get_web_search_tool()
-#     router_chain = get_router_chain(llm)
-#     retrieval_grader_chain = get_retrieval_grader_chain(llm)
-#     rag_chain = get_generate_chain(llm)
-
-#     # Store resources globally in `shared_resources`
-#     data["retriever"] = vectorstore.as_retriever()
-#     data["llm"] = llm
-#     data["web_search_tool"] = get_web_search_tool()
-#     data["router_chain"] = get_router_chain(llm)
-#     data["retrieval_grader_chain"] = get_retrieval_grader_chain(llm)
-#     data["rag_chain"] = get_generate_chain(llm)
-
-#     data["chat_graph"] = create_graph()
-
-#     yield
-
-#     # Shutdown
-#     print("Shutdown")
-#     data.clear()
 
 app = FastAPI()
 
@@ -146,27 +107,12 @@ async def ai(body: ChatBody):
         raise HTTPException(status_code=400, detail="No chat provided.")
 
     text = body.text
-    
-    # print(text)
 
     inputs = {
         "question": text,
         "documents": [],
     }
-    # print("shared again :", shared_resources_list)
-    # Inject the initialized objects into the workflow's state
-    # inputs = {
-    #     "question": text,
-    #     "llm": app.state.llm,
-    #     "retriever": app.state.retriever,
-    #     "web_search_tool": app.state.web_search_tool,
-    #     "router_chain": app.state.router_chain,
-    #     "retrieval_grader_chain": app.state.retrieval_grader_chain,
-    #     "rag_chain": app.state.rag_chain,
-    #     "documents": []  # initialize an empty list of documents
-    # }
     config = {"configurable": {"thread_id": "1"}}
-    # chat_graph = data["chat_graph"]
     for output in shared_resources_list["chat_graph"].stream(inputs, config):
         # print("output: ", output)
         for key, value in output.items():

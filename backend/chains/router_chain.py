@@ -17,7 +17,7 @@ class RouteQuery(BaseModel):
 # Instructions for the router 
 ROUTER_INSTRUCTIONS = """
 You are an expert in routing a user question to the appropriate datasource or directly to the LLM for general conversation.
-- Use "generate" if the question is conversational in nature or if the question is not clear enough to be directed to vectorstore or websearch (e.g. one word queries, etc.).
+- Use "generate" if the question is conversational in nature or if the question is not clear enough or ambiguous in nature to be directed to vectorstore or websearch (e.g. one word queries, etc.) and you need to ask the user for more clarification.
 - Use "vectorstore" if the question is specific to fashion styles, outfit suggestions, or context available in documents.
 - Use "websearch" if the question is related to fashion but goes beyond the available fashion-related documents or requires external information.
 
